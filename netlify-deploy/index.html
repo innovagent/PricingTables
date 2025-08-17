@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing Table - SaaS Plans</title>
+    <meta name="description" content="Choose the perfect plan for your needs. Simple, transparent pricing with no hidden fees." />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💳%3C/text%3E%3C/svg%3E" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS via CDN (for deployment) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'raleway': ['Raleway', 'sans-serif'],
+            },
+            colors: {
+              background: '#ffffff',
+              foreground: '#030213',
+              card: '#ffffff',
+              'card-foreground': '#030213',
+              primary: '#030213',
+              'primary-foreground': '#ffffff',
+              secondary: '#f3f3f5',
+              'secondary-foreground': '#030213',
+              muted: '#ececf0',
+              'muted-foreground': '#717182',
+              accent: '#e9ebef',
+              'accent-foreground': '#030213',
+              destructive: '#d4183d',
+              'destructive-foreground': '#ffffff',
+              border: 'rgba(0, 0, 0, 0.1)',
+              input: 'transparent',
+              'input-background': '#f3f3f5',
+              ring: '#717182',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+      body {
+        font-family: 'Raleway', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .gradient-bg {
+        background: #6d28d9;
+        min-height: 100vh;
+      }
+      
+      .card-gradient {
+        background: linear-gradient(145deg, #3a1a8a, #2a1270);
+      }
+      
+      .button-gradient {
+        background: linear-gradient(145deg, #4f46e5, #7c3aed);
+      }
+      
+      .badge-gradient {
+        background: linear-gradient(145deg, #ff6722, #e54722);
+      }
+      
+      .popular-glow {
+        box-shadow: 
+          0 30px 60px -12px rgba(255, 87, 34, 0.4),
+          0 25px 50px -12px rgba(0, 0, 0, 0.5),
+          0 10px 20px -5px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+          0 0 0 3px #ff5722;
+      }
+      
+      .card-shadow {
+        box-shadow: 
+          0 25px 50px -12px rgba(0, 0, 0, 0.5),
+          0 10px 20px -5px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+      }
+      
+      .switch-gradient:checked {
+        background: linear-gradient(to right, #ff5722, #e64a19);
+      }
+      
+      /* Embed friendly styles */
+      .embed-container {
+        width: 100%;
+        min-height: 100vh;
+        background: #6d28d9;
+      }
+      
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .scale-105 {
+          transform: scale(1) !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="embed-container"></div>
+    
+    <!-- React via CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Lucide React Icons -->
+    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
+    
+    <script>
+      const { useState, createElement: h } = React;
+      const { createRoot } = ReactDOM;
+      const { Check, X } = lucideReact;
+
+      // Pricing data
+      const pricingTiers = [
+        {
+          name: "Basic",
+          monthlyPrice: 97,
+          annualPrice: 81,
+          description: "Simplify Your Pipeline",
+          features: [
+            "Innovagent Mobile App",
+            "AI-enabled Chat Widget",
+            "Meta DM Chat Widget",
+            "Meta Comments Widget",
+            "Social Media Reputation Management",
+            "AI-enabled Email Campaign Builder",
+            "AI-enabled Calendaring",
+            "Payment Integration",
+            { name: "AI Employee", available: false },
+            { name: "AI Marketing Tools", available: false },
+            { name: "Advanced Reporting", available: false },
+            { name: "AI Workflows", available: false },
+            { name: "AI Automations", available: false },
+            { name: "Forms and Surveys", available: false },
+            { name: "Missed Call Text Back", available: false },
+            { name: "Lightweight CRM", available: false },
+            { name: "CRM integration (Salesforce, ServiceTitan, Jobber)", available: false },
+            { name: "Dedicated Customer Success Manager", available: false },
+            { name: "Priority Support", available: false },
+            { name: "Advanced Setup for Workflows and CRM", available: false },
+            { name: "Custom Integrations", available: false },
+            { name: "Custom Campaign Setup", available: false },
+            { name: "Advanced Reputation Manager", available: false }
+          ],
+          buttonText: "Start Basic Trial",
+          buttonVariant: "outline"
+        },
+        {
+          name: "Standard",
+          monthlyPrice: 297,
+          annualPrice: 248,
+          description: "Power to Save Massive Time",
+          features: [
+            "Innovagent Mobile App",
+            "AI-enabled Chat Widget",
+            "Meta DM Chat Widget",
+            "Meta Comments Widget",
+            "Social Media Reputation Management",
+            "AI-enabled Email Campaign Builder",
+            "AI-enabled Calendaring",
+            "Payment Integration",
+            { name: "AI Employee", available: true },
+            { name: "AI Marketing Tools", available: true },
+            { name: "Advanced Reporting", available: true },
+            { name: "AI Workflows", available: true },
+            { name: "AI Automations", available: true },
+            { name: "Forms and Surveys", available: true },
+            { name: "Missed Call Text Back", available: true },
+            { name: "Lightweight CRM", available: true },
+            { name: "CRM integration (Salesforce, ServiceTitan, Jobber)", available: true },
+            { name: "Dedicated Customer Success Manager", available: true },
+            { name: "Priority Support", available: true },
+            { name: "Advanced Setup for Workflows and CRM", available: false },
+            { name: "Custom Integrations", available: false },
+            { name: "Custom Campaign Setup", available: false },
+            { name: "Advanced Reputation Manager", available: false }
+          ],
+          isPopular: true,
+          buttonText: "Start Standard Trial",
+          buttonVariant: "default"
+        },
+        {
+          name: "Premium",
+          monthlyPrice: 497,
+          annualPrice: 415,
+          description: "Level Up Your Productivity",
+          features: [
+            "Innovagent Mobile App",
+            "AI-enabled Chat Widget",
+            "Meta DM Chat Widget",
+            "Meta Comments Widget",
+            "Social Media Reputation Management",
+            "AI-enabled Email Campaign Builder",
+            "AI-enabled Calendaring",
+            "Payment Integration",
+            { name: "AI Employee", available: true },
+            { name: "AI Marketing Tools", available: true },
+            { name: "Advanced Reporting", available: true },
+            { name: "AI Workflows", available: true },
+            { name: "AI Automations", available: true },
+            { name: "Forms and Surveys", available: true },
+            { name: "Missed Call Text Back", available: true },
+            { name: "Lightweight CRM", available: true },
+            { name: "CRM integration (Salesforce, ServiceTitan, Jobber)", available: true },
+            { name: "Dedicated Customer Success Manager", available: true },
+            { name: "Priority Support", available: true },
+            { name: "Advanced Setup for Workflows and CRM", available: true },
+            { name: "Custom Integrations", available: true },
+            { name: "Custom Campaign Setup", available: true },
+            { name: "Advanced Reputation Manager", available: true }
+          ],
+          buttonText: "Start Premium Trial",
+          buttonVariant: "outline"
+        }
+      ];
+
+      // Switch Component
+      function Switch({ checked, onCheckedChange, className }) {
+        return h('button', {
+          type: 'button',
+          className: `inline-flex h-6 w-11 items-center rounded-full px-1 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${checked ? 'bg-gradient-to-r from-orange-600 to-orange-500' : 'bg-white/20'} ${className}`,
+          onClick: () => onCheckedChange(!checked),
+          'aria-checked': checked,
+          role: 'switch'
+        }, h('span', {
+          className: `block h-4 w-4 rounded-full bg-white transition-transform ${checked ? 'translate-x-5' : 'translate-x-0'}`
+        }));
+      }
+
+      // Badge Component
+      function Badge({ children, className }) {
+        return h('span', {
+          className: `inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${className}`
+        }, children);
+      }
+
+      // Button Component
+      function Button({ children, onClick, className, style, onMouseEnter, onMouseLeave }) {
+        return h('button', {
+          onClick,
+          onMouseEnter,
+          onMouseLeave,
+          className: `px-4 py-2 rounded-lg font-medium transition-all duration-300 ${className}`,
+          style
+        }, children);
+      }
+
+      // Card Components
+      function Card({ children, className, style }) {
+        return h('div', { className: `rounded-lg ${className}`, style }, children);
+      }
+
+      function CardHeader({ children, className }) {
+        return h('div', { className: `p-6 ${className}` }, children);
+      }
+
+      function CardTitle({ children, className, style }) {
+        return h('h3', { className, style }, children);
+      }
+
+      function CardDescription({ children, className, style }) {
+        return h('p', { className, style }, children);
+      }
+
+      function CardContent({ children, className }) {
+        return h('div', { className: `px-6 ${className}` }, children);
+      }
+
+      function CardFooter({ children, className }) {
+        return h('div', { className: `p-6 ${className}` }, children);
+      }
+
+      // Main Pricing Table Component
+      function PricingTable() {
+        const [isAnnual, setIsAnnual] = useState(true);
+
+        const formatPrice = (tier) => {
+          const price = isAnnual ? tier.annualPrice : tier.monthlyPrice;
+          return price === 0 ? "$0" : `$${price.toFixed(0)}`;
+        };
+
+        const getPeriod = (tier) => {
+          return isAnnual ? "per month, billed annually" : "per month";
+        };
+
+        const getSavings = (tier) => {
+          if (!isAnnual) return null;
+          const monthlyCost = tier.monthlyPrice * 12;
+          const annualCost = tier.annualPrice * 12;
+          const savings = Math.round(((monthlyCost - annualCost) / monthlyCost) * 100);
+          return savings;
+        };
+
+        return h('div', {
+          className: 'w-full max-w-6xl mx-auto px-6 py-20'
+        }, [
+          // Header
+          h('div', {
+            key: 'header',
+            className: 'text-center mb-16'
+          }, [
+            h('h1', {
+              key: 'title',
+              className: 'text-5xl font-bold text-white mb-6 leading-tight'
+            }, 'Simple, transparent pricing'),
+            h('p', {
+              key: 'subtitle',
+              className: 'text-xl text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed'
+            }, 'Choose the perfect plan for your needs. All plans include our core features with no hidden fees.'),
+            
+            // Billing Toggle
+            h('div', {
+              key: 'toggle',
+              className: 'inline-flex items-center gap-4 backdrop-blur-sm rounded-full p-2 mb-12',
+              style: { backgroundColor: '#311687' }
+            }, [
+              h('span', {
+                key: 'monthly',
+                className: `px-4 py-2 rounded-full text-sm font-medium transition-all ${!isAnnual ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white'}`
+              }, 'Monthly'),
+              h(Switch, {
+                key: 'switch',
+                checked: isAnnual,
+                onCheckedChange: setIsAnnual,
+                className: 'transition-all duration-300'
+              }),
+              h('span', {
+                key: 'annual',
+                className: `px-4 py-2 rounded-full text-sm font-medium transition-all ${isAnnual ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white'}`
+              }, 'Annual'),
+              isAnnual && h(Badge, {
+                key: 'badge',
+                className: 'bg-green-500 text-white border-0 ml-2 font-medium'
+              }, 'Save 16%')
+            ])
+          ]),
+
+          // Pricing Cards Grid
+          h('div', {
+            key: 'grid',
+            className: 'grid grid-cols-1 md:grid-cols-3 gap-8 pricing-grid'
+          }, pricingTiers.map((tier, index) => {
+            const savings = getSavings(tier);
+
+            return h(Card, {
+              key: tier.name,
+              className: `relative border-0 transition-all duration-300 flex flex-col h-full ${tier.isPopular ? 'scale-105' : ''}`,
+              style: tier.isPopular ? { transform: 'scale(1.05)' } : {}
+            }, [
+              // Popular Badge
+              tier.isPopular && h('div', {
+                key: 'popular-badge',
+                className: 'absolute -top-4 left-1/2 transform -translate-x-1/2'
+              }, h(Badge, {
+                className: 'badge-gradient text-white border-0 px-6 py-2 font-bold text-sm',
+                style: {
+                  boxShadow: '0 8px 16px -4px rgba(255, 87, 34, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2)'
+                }
+              }, 'MOST POPULAR')),
+
+              // Card Header
+              h(CardHeader, {
+                key: 'header',
+                className: 'text-center pt-8 pb-6 card-gradient',
+                style: tier.isPopular ? {} : { background: 'linear-gradient(145deg, #3a1a8a, #2a1270)' }
+              }, [
+                h(CardTitle, {
+                  key: 'name',
+                  className: 'text-2xl font-bold mb-2',
+                  style: { color: '#f4f4f4' }
+                }, tier.name),
+                h('div', {
+                  key: 'price',
+                  className: 'mb-4'
+                }, [
+                  h('span', {
+                    key: 'amount',
+                    className: 'text-5xl font-bold transition-all duration-300',
+                    style: { color: '#f4f4f4' }
+                  }, formatPrice(tier)),
+                  h('span', {
+                    key: 'period',
+                    className: 'ml-2 text-lg',
+                    style: { color: '#f4f4f4', opacity: '0.8' }
+                  }, `/${getPeriod(tier)}`)
+                ]),
+                h('div', {
+                  key: 'savings',
+                  className: 'h-8 flex items-center justify-center mb-4'
+                }, savings ? h('div', {
+                  className: 'text-sm text-green-600 font-semibold bg-green-50 px-3 py-1 rounded-full inline-block'
+                }, `Save ${savings}% with annual billing`) : h('div', { className: 'h-6' })),
+                h(CardDescription, {
+                  key: 'description',
+                  className: 'text-lg',
+                  style: { color: '#f4f4f4', opacity: '0.9' }
+                }, tier.description)
+              ]),
+
+              // Card Content - Features
+              h(CardContent, {
+                key: 'content',
+                className: 'pb-8 flex-grow card-gradient',
+                style: tier.isPopular ? {} : { background: 'linear-gradient(145deg, #3a1a8a, #2a1270)' }
+              }, h('ul', {
+                className: 'space-y-4'
+              }, tier.features.map((feature, featureIndex) => {
+                const isFeatureObject = typeof feature === 'object';
+                const featureName = isFeatureObject ? feature.name : feature;
+                const isAvailable = isFeatureObject ? feature.available : true;
+
+                return h('li', {
+                  key: featureIndex,
+                  className: 'flex items-center gap-3'
+                }, [
+                  h(isAvailable ? Check : X, {
+                    key: 'icon',
+                    className: `w-5 h-5 ${isAvailable ? 'text-green-500' : 'text-red-500'} flex-shrink-0`
+                  }),
+                  h('span', {
+                    key: 'text',
+                    className: `font-medium ${isAvailable ? '' : 'line-through'}`,
+                    style: {
+                      color: '#f4f4f4',
+                      opacity: isAvailable ? '0.9' : '0.5'
+                    }
+                  }, featureName)
+                ]);
+              }))),
+
+              // Card Footer - Button
+              h(CardFooter, {
+                key: 'footer',
+                className: 'card-gradient',
+                style: tier.isPopular ? {} : { background: 'linear-gradient(145deg, #3a1a8a, #2a1270)' }
+              }, h(Button, {
+                className: 'w-full transition-all duration-300 py-6 text-lg font-semibold text-white hover:scale-105',
+                style: {
+                  background: 'linear-gradient(145deg, #4f46e5, #7c3aed)',
+                  boxShadow: '0 10px 20px -5px rgba(79, 70, 229, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2)'
+                },
+                onMouseEnter: (e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 15px 30px -5px rgba(79, 70, 229, 0.6), 0 8px 16px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.2)';
+                },
+                onMouseLeave: (e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 10px 20px -5px rgba(79, 70, 229, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2)';
+                },
+                onClick: () => {
+                  // Handle button click - you can customize this
+                  window.open('https://your-signup-url.com', '_blank');
+                }
+              }, tier.buttonText))
+            ].filter(Boolean));
+          })),
+
+          // Footer
+          h('div', {
+            key: 'footer',
+            className: 'text-center mt-16'
+          }, [
+            h('p', {
+              key: 'trial-text',
+              className: 'text-white/80 mb-6 text-lg'
+            }, 'All plans include a 14-day free trial. No credit card required.'),
+            h('div', {
+              key: 'features',
+              className: 'flex flex-wrap justify-center gap-8 text-white/70'
+            }, [
+              ['Cancel anytime', 'GDPR Compliant', '24/7 System Monitoring', 'Real-time Status Page'].map((feature, index) => 
+                h('span', {
+                  key: index,
+                  className: 'flex items-center gap-2'
+                }, [
+                  h(Check, { key: 'icon', className: 'w-4 h-4' }),
+                  feature
+                ])
+              )
+            ])
+          ])
+        ]);
+      }
+
+      // Main App Component
+      function App() {
+        return h('div', {
+          className: 'gradient-bg'
+        }, h(PricingTable));
+      }
+
+      // Mount the app
+      const container = document.getElementById('app');
+      const root = createRoot(container);
+      root.render(h(App));
+    </script>
+  </body>
+</html>

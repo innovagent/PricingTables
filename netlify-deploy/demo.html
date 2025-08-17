@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Table Widget Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-block code {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            color: #333;
+        }
+        .demo-container {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background: #fafafa;
+        }
+        .demo-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .btn {
+            background: #6d28d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #5b21b6;
+            transform: translateY(-1px);
+        }
+        .alert {
+            background: #e7f3ff;
+            border: 1px solid #b3d7ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Pricing Table Widget Demo</h1>
+        <p class="subtitle">See how easy it is to embed our pricing table on any website</p>
+        
+        <div class="alert">
+            <strong>Live Demo:</strong> The pricing table below is embedded using our widget script. 
+            You can copy the code and use it on your own website!
+        </div>
+
+        <div class="section">
+            <h2>📋 Quick Start</h2>
+            <p>Add this code to any webpage to embed the pricing table:</p>
+            
+            <div class="code-block">
+                <code><!-- Include the widget script --><br>
+<script src="https://your-netlify-domain.netlify.app/embed.js"></script><br><br>
+<!-- Create a container with auto-initialization --><br>
+<div id="pricing-table" data-pricing-table data-height="1200px"></div></code>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Live Demo</h2>
+            <div class="demo-container">
+                <div class="demo-title">Embedded Pricing Table:</div>
+                <div id="pricing-demo" data-pricing-table data-height="1200px" data-responsive="true"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚡ Advanced Usage</h2>
+            <p>For more control, you can initialize the widget manually:</p>
+            
+            <div class="code-block">
+                <code><div id="my-pricing-table"></div><br>
+<script src="https://your-netlify-domain.netlify.app/embed.js"></script><br>
+<script><br>
+&nbsp;&nbsp;PricingTableWidget.init({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;container: 'my-pricing-table',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;height: '1200px',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;width: '100%',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;responsive: true<br>
+&nbsp;&nbsp;});<br>
+</script></code>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Configuration Options</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Option</th>
+                    <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Default</th>
+                    <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Description</th>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;"><code>container</code></td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">required</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">Element ID or DOM element to embed the widget</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;"><code>width</code></td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">'100%'</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">Widget width (CSS value)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;"><code>height</code></td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">'1200px'</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">Widget height (CSS value)</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #dee2e6;"><code>responsive</code></td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">true</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">Enable responsive behavior</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🌐 Iframe Alternative</h2>
+            <p>You can also embed the pricing table directly using an iframe:</p>
+            
+            <div class="code-block">
+                <code><iframe <br>
+&nbsp;&nbsp;src="https://your-netlify-domain.netlify.app/index.html" <br>
+&nbsp;&nbsp;width="100%" <br>
+&nbsp;&nbsp;height="1200px" <br>
+&nbsp;&nbsp;frameborder="0"<br>
+&nbsp;&nbsp;scrolling="no"><br>
+</iframe></code>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📱 Mobile Responsive</h2>
+            <p>The pricing table automatically adapts to different screen sizes and devices. Try resizing your browser window to see it in action!</p>
+            
+            <button class="btn" onclick="resizeDemo('400px')">Mobile View</button>
+            <button class="btn" onclick="resizeDemo('768px')">Tablet View</button>
+            <button class="btn" onclick="resizeDemo('100%')">Desktop View</button>
+        </div>
+
+        <div class="section">
+            <h2>✨ Features</h2>
+            <ul>
+                <li>✅ Responsive design that works on all devices</li>
+                <li>✅ Monthly/Annual billing toggle with savings calculator</li>
+                <li>✅ Modern purple gradient design</li>
+                <li>✅ Easy embedding with just 2 lines of code</li>
+                <li>✅ No dependencies on your website</li>
+                <li>✅ Fast loading and optimized performance</li>
+                <li>✅ Cross-browser compatible</li>
+                <li>✅ GDPR compliant</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Include the widget script -->
+    <script src="./embed.js"></script>
+    
+    <!-- Demo controls -->
+    <script>
+        function resizeDemo(width) {
+            const demo = document.getElementById('pricing-demo');
+            const container = demo.parentElement;
+            container.style.maxWidth = width;
+            container.style.margin = width === '100%' ? '0' : '0 auto';
+            container.style.transition = 'all 0.3s ease';
+            
+            // Add a small delay to let the resize animation complete
+            setTimeout(() => {
+                // Force iframe to recalculate if needed
+                const iframe = demo.querySelector('iframe');
+                if (iframe) {
+                    iframe.style.width = '100%';
+                }
+            }, 350);
+        }
+    </script>
+</body>
+</html>

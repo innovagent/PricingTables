@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embeddable Pricing Table - SaaS Pricing Component</title>
+    <meta name="description" content="Beautiful, responsive pricing table with 3D effects and annual/monthly toggle. Perfect for SaaS websites." />
+    <meta name="keywords" content="pricing table, saas, react, embeddable, component" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Embeddable Pricing Table" />
+    <meta property="og:description" content="Beautiful, responsive pricing table with 3D effects and annual/monthly toggle" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-domain.vercel.app" />
+    <meta property="og:image" content="https://your-domain.vercel.app/preview.png" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Embeddable Pricing Table" />
+    <meta name="twitter:description" content="Beautiful, responsive pricing table with 3D effects" />
+    <meta name="twitter:image" content="https://your-domain.vercel.app/preview.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💳%3C/text%3E%3C/svg%3E" />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Analytics (optional) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+    
+    <style>
+      /* Loading styles */
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #6d28d9;
+        color: white;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+      }
+      
+      .loading::after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        border: 2px solid #fff;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        margin-left: 10px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading">Loading pricing table...</div>
+    </div>
+    
+    <script type="module" src="/main.tsx"></script>
+    
+    <!-- Embed tracking (optional) -->
+    <script>
+      // Track if loaded in iframe
+      if (window !== window.top) {
+        console.log('Pricing table loaded in iframe');
+        // Optional: Send message to parent window
+        window.parent.postMessage({
+          type: 'PRICING_TABLE_LOADED',
+          timestamp: Date.now()
+        }, '*');
+      }
+      
+      // Track button clicks globally
+      window.addEventListener('message', function(event) {
+        if (event.data.type === 'PRICING_BUTTON_CLICKED') {
+          console.log('Pricing button clicked:', event.data);
+          // Optional: Send to analytics
+          // gtag('event', 'select_plan', { plan_name: event.data.tier });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "name": "embeddable-pricing-table",
+  "version": "1.0.0",
+  "description": "A beautiful, embeddable pricing table component with 3D effects and annual/monthly toggle",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:embed": "vite build --mode embed",
+    "preview": "vite preview",
+    "deploy": "npm run build && vercel --prod",
+    "build:netlify": "npm run build",
+    "build-only": "vite build"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.6",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.14.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "keywords": [
+    "pricing-table",
+    "react",
+    "tailwind",
+    "embeddable",
+    "saas",
+    "component"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://your-domain.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/embeddable-pricing-table.git"
+  }
+}
